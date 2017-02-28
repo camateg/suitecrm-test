@@ -85,7 +85,7 @@
     $case_name = $get_entry_result->entry_list[0]->name_value_list->name->value;
     $case_number = $get_entry_result->entry_list[0]->name_value_list->case_number->value;
 
-    $cases = array('name' => $case_name, 'number' => $case_number);
+    $cases = array('id' => $cid, 'name' => $case_name, 'number' => $case_number);
 
     header('Content-type: application/json');
     echo json_encode($cases);

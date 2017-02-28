@@ -1,19 +1,21 @@
+<head>
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 
 <script>
-  $.getJSON('/get_accounts.php', function(res) {
+$(document).ready(function() {
+  $.getJSON('get_accounts.php', function(res) {
     $.each(res, function(v,t) {
       $('#accounts').append(new Option(t['name'],t['id']));
     });
   });
 
-  $('body').on('submit', '#case_form', function(e) {
+  $('#case_form').on('submit', function(e) {
     e.preventDefault();
 
-    console.log('hi');
+    $('#case_number').fadeOut(300); 
 
     payload = {
         'account': $('#accounts').val(),
@@ -21,15 +23,17 @@
         'body': $('#text').val()
     };
 
-    $.post('/case.php',
+    $.post('case.php',
       payload).done(
       function(data,status) {
-        console.log(data + status);
+        $('#case_number').html(data['name'] + " was submitted as <a href=\"/suite/index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DCases%26offset%3D1%26stamp%3D1488256673068343400%26return_module%3DCases%26action%3DDetailView%26record%3D" + data['id'] + '">#' + data['number'] + '</a>').fadeIn(1000);
+        console.log(data);
       }
     );
   });
-       
+});       
 </script>
+</head>
 <body>
 <form id="case_form" method="POST" action="/case.php">
   <select name="account" id="accounts">
@@ -39,4 +43,5 @@
   <input id="text" name="body"></input>
   <button id="submit" value="go">go</button>
 </form>
+<div id="case_number">Please submit your case...</div>
 </body>

@@ -1,0 +1,42 @@
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+<script>
+  $.getJSON('/get_accounts.php', function(res) {
+    $.each(res, function(v,t) {
+      $('#accounts').append(new Option(t['name'],t['id']));
+    });
+  });
+
+  $('body').on('submit', '#case_form', function(e) {
+    e.preventDefault();
+
+    console.log('hi');
+
+    payload = {
+        'account': $('#accounts').val(),
+        'title': $('#title').val(),
+        'body': $('#text').val()
+    };
+
+    $.post('/case.php',
+      payload).done(
+      function(data,status) {
+        console.log(data + status);
+      }
+    );
+  });
+       
+</script>
+<body>
+<form id="case_form" method="POST" action="/case.php">
+  <select name="account" id="accounts">
+    <option value="">Choose Account</option>
+  </select>
+  <input id="title" name="title"></input>
+  <input id="text" name="body"></input>
+  <button id="submit" value="go">go</button>
+</form>
+</body>

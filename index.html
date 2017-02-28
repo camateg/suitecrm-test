@@ -26,6 +26,7 @@ $(document).ready(function() {
     $.post('case.php',
       payload).done(
       function(data,status) {
+        $('#submit').fadeOut(1000); 
         $('#case_number').html(data['name'] + " was submitted as <a href=\"/suite/index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DCases%26offset%3D1%26stamp%3D1488256673068343400%26return_module%3DCases%26action%3DDetailView%26record%3D" + data['id'] + '">#' + data['number'] + '</a>').fadeIn(1000);
         console.log(data);
       }

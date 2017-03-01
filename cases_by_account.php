@@ -2,12 +2,10 @@
 
     require_once('functions.php');
 
-    echo $session_id . "<br />";
-
     $gel_parameters = array(
         "session" => $session_id,
         "module_name" => "Cases",
-        "query" => " cases.account_id = '93bbb4e2-e8ce-f526-5fb3-58b4e765f895' ",
+        "query" => " cases.account_id = '" . $_GET['account_id'] . "' ",
  	"order_by" => "",
         "offset" => 0,
 	"select_fields" => array(),
@@ -19,11 +17,13 @@
 
     $gel_results = call("get_entry_list", $gel_parameters, $url);
 
-    print_r($gel_results); 
-    $case_name = $get_entry_result->entry_list[0]->name_value_list->name->value;
-    $case_number = $get_entry_result->entry_list[0]->name_value_list->case_number->value;
+    $cases = [];
 
-    $cases = array('id' => $cid, 'name' => $case_name, 'number' => $case_number);
+    foreach($gel_results->entry_list as $entry) {
+      $id = $entry->name_value_list->id->value;
+      $name = $entry->name_value_list->name->value;
+      $cases[]= array("id" => $id, "name" => $name);
+    }
 
-    //header('Content-type: application/json');
-    //echo json_encode($cases);
+    header('Content-type: application/json');
+    echo json_encode($cases);

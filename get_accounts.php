@@ -2,22 +2,6 @@
 
     require_once('functions.php');
 
-    //login --------------------------------------------- 
-
-    $login_parameters = array(
-         "user_auth" => array(
-              "user_name" => $username,
-              "password" => md5($password),
-              "version" => "1"
-         ),
-         "application_name" => "mCasePortal",
-         "name_value_list" => array(),
-    );
-
-    $login_result = call("login", $login_parameters, $url);
-
-    $session_id = $login_result->id;
-
     $gel_parameters = array(
          "session" => $session_id,
          "module_name" => "Accounts",
@@ -25,7 +9,7 @@
          "order_by" => "",
          "offset" => 0,
          "select_fields" => array(),
-         "link_names_to_field_array" => array(),
+         "link_name_to_fields_array" => array(),
          "max_results" => 10,
          "deleted" => 0,
          "favorites" => false,

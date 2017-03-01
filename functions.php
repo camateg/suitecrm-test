@@ -36,4 +36,18 @@
 
         return $response;
     }
+
+    $login_parameters = array(
+         "user_auth" => array(
+              "user_name" => $username,
+              "password" => md5($password),
+              "version" => "1"
+         ),
+         "application_name" => "mCasePortal",
+         "name_value_list" => array(),
+    );
+
+    $login_result = call("login", $login_parameters, $url);
+
+    $session_id = $login_result->id;
 ?>

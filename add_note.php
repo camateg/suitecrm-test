@@ -22,11 +22,13 @@
          "session" => $session_id,
          "module_name" => "AOP_Case_Updates",
          "name_value_list" => array(
-              array("name" => "name", "value" => $_POST['title']),
+              array("name" => "name", "value" => $_POST['name']),
+              array("name" => "description", "value" => $_POST['name']),
               array("name" => "case_id", "value" => $_POST['case_id']),
          ),
     );
 
     $set_entry_result = call("set_entry", $set_entry_parameters, $url);
 
-    echo json_encode($cases);
+    
+    print_r($set_entry_result);

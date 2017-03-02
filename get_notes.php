@@ -18,7 +18,6 @@
 
     $ge_result = call("get_entry", $ge_parameters, $url);
    
-    print_r($get_entry_result->entry_list[0]); 
     $case_name = $ge_result->entry_list[0]->name_value_list->name->value;
     $case_number = $ge_result->entry_list[0]->name_value_list->case_number->value;
     $case_description = $ge_result->entry_list[0]->name_value_list->description->value;
@@ -45,8 +44,13 @@
       $name = $entry->name_value_list->name->value;
       $desc = $entry->name_value_list->description->value;
       $date_entered = $entry->name_value_list->date_entered->value;
-
-      $notes[] = array("id" => $id, "name" => $name, "description" => $desc, "date" => $date_entered);
+      $assigned_user_id = $entry->name_value_list->assigned_user_id->value;
+      if ($assigned_user_id == $portal_user) {
+         $portal = 1;
+      } else {
+         $portal = 0;
+      }
+      $notes[] = array("id" => $id, "name" => $name, "description" => $desc, "date" => $date_entered, "portal" => $portal);
     };
 
     usort($notes, 'date_compare');

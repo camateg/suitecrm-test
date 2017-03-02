@@ -17,38 +17,10 @@
     $case_name = $ge_result->entry_list[0]->name_value_list->name->value;
     $case_number = $ge_result->entry_list[0]->name_value_list->case_number->value;
     $case_description = $ge_result->entry_list[0]->name_value_list->description->value;
-
-    $gel_parameters = array(
-      "session" => $session_id,
-      "module_name" => "AOP_Case_Updates",
-      "query" => " aop_case_updates.case_id = '" . $_GET['case_id'] . "' ",
-      "order_by" => " aop_case_updates.date_modified ",
-      "offset" => "",
-      "select_fields" => array(),
-      "link_name_to_fields_array" => [],
-      "max_results" => 40,
-      "deleted" => 0,
-      "favorites" => false,
-    );
-
-    $gel_results = call("get_entry_list", $gel_parameters, $url);
-
-    $notes = [];
-
-    foreach($gel_results->entry_list as $entry) {
-      $id = $entry->name_value_list->id->value;
-      $name = $entry->name_value_list->name->value;
-      $desc = $entry->name_value_list->description->value;
-      $date_entered = $entry->name_value_list->date_entered->value;
-
-      $notes[] = array("id" => $id, "name" => $name, "description" => $desc, "date" => $date_entered);
-    };
-
-    usort($notes, 'date_compare');
-
+    
     $cid = $_GET['case_id'];
 
-    $case_info = array("case_name" => $case_name, "case_number" => $case_number, "case_description" => $case_description, "notes" => $notes);
+    $case_info = array("case_name" => $case_name, "case_number" => $case_number, "case_description" => $case_description);
 
 ?>
 <head>
@@ -75,6 +47,7 @@ $(document).ready(function() {
       payload).done(
       function(data,status) {
         refreshNotes();
+        $('#note_content').val('');
       }
     );      
   });
@@ -87,7 +60,12 @@ function refreshNotes() {
 
   $.getJSON('get_notes.php?case_id=' + case_id, function(ret) {
     ret.forEach(function(note) {
-      $('#notes').append('<div class="well">' + note['date'] + ' - ' + note['name'] + '</div>');
+     console.log(note['portal']);
+     var btn_class = 'btn btn-danger';
+     if (note['portal'] == 1) {
+        btn_class = 'btn btn-default';
+     } 
+     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + note['date'] + ' - ' + note['name'] + '</div><br />');
     }); 
   });
 };

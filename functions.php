@@ -5,6 +5,8 @@
     $username = "admin";
     $password = "admin";
 
+    $portal_user = "3f730ed9-ab08-adca-6aea-58b8260b8a4a";
+
     //function to make cURL request
     function call($method, $parameters, $url)
     {

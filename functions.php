@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     $url = "http://localhost:8888/suite/service/v4_1/rest.php";
     $username = "admin";
     $password = "admin";

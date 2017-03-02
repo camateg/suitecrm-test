@@ -59,6 +59,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+<a href="logout.php">Logout</a>
 <div class="well">
 <form id="case_form" method="POST" action="/case.php">
   <select name="account" id="accounts">

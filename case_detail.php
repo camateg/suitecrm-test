@@ -22,11 +22,11 @@
       "session" => $session_id,
       "module_name" => "AOP_Case_Updates",
       "query" => " aop_case_updates.case_id = '" . $_GET['case_id'] . "' ",
-      "order_by" => "",
+      "order_by" => " aop_case_updates.date_modified ",
       "offset" => "",
       "select_fields" => array(),
       "link_name_to_fields_array" => [],
-      "max_results" => 10,
+      "max_results" => 40,
       "deleted" => 0,
       "favorites" => false,
     );
@@ -39,8 +39,12 @@
       $id = $entry->name_value_list->id->value;
       $name = $entry->name_value_list->name->value;
       $desc = $entry->name_value_list->description->value;
-      $notes[] = array("id" => $id, "name" => $name, "description" => $desc);
+      $date_entered = $entry->name_value_list->date_entered->value;
+
+      $notes[] = array("id" => $id, "name" => $name, "description" => $desc, "date" => $date_entered);
     };
+
+    usort($notes, 'date_compare');
 
     $cid = $_GET['case_id'];
 
@@ -60,6 +64,7 @@
 
 <script>
 $(document).ready(function() {
+  refreshNotes();
   $('#add_note').on('submit', function(e) {
     e.preventDefault();
     payload = {
@@ -69,27 +74,40 @@ $(document).ready(function() {
     $.post('add_note.php',
       payload).done(
       function(data,status) {
-        console.log(data);
+        refreshNotes();
       }
     );      
   });
 });
 
+function refreshNotes() {
+  var case_id = "<?php echo $cid ?>";
+
+  $('#notes').html('');
+
+  $.getJSON('get_notes.php?case_id=' + case_id, function(ret) {
+    ret.forEach(function(note) {
+      $('#notes').append('<div class="well">' + note['date'] + ' - ' + note['name'] + '</div>');
+    }); 
+  });
+};
 
 </script>
 
 </head>
 <body>
-    <h2><?php echo $case_name ?> #<?php echo $case_number ?></h2>
-    <h3><?php echo $case_description ?></h3>
+    <h3><a href="show_cases.php">Home</a></h3>
+    <h2>#<?php echo $case_number ?> - <?php echo $case_name ?></h2>
+    <h5><?php echo $case_description ?></h5>
     <!-- header('Content-type: application/json');
     echo json_encode($case_info); -->
-    <?php
+    <div id="notes"></div>
+    <!-- <?php
       foreach($notes as $note) {
-        echo '<div class="well">' . $note['description'] . '</div>';
+        echo '<div class="well">' . $note['description'] . ' @ ' . $note['date'] . '</div>';
       };
-    ?>
-    <form method="POST" id="add_note">
+    ?> -->
+    <form action="" method="POST" id="add_note">
       <input id="note_content"></input>
       <input type="submit" value="submit note"></input>
     </form> 

@@ -25,7 +25,7 @@ $(document).ready(function() {
          id = ele['id'] || '';
          name = ele['name'] || '';
          href = "case_detail.php?case_id=" +  id;
-         $('#case_history').append('<a class="case_link" id="' + id + '" href="' + href + '">' + name + '</a><br />');
+         $('#case_history').append('<a style="margin-bottom: 10px;" width="300px" class="btn btn-default case_link" id="' + id + '" href="' + href + '">' + name + '</a><br />');
        });
     });
 
@@ -59,17 +59,24 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<a href="logout.php">Logout</a>
+<a class="btn btn-primary" href="logout.php">Logout</a>
 <div class="well">
-<form id="case_form" method="POST" action="/case.php">
-  <select name="account" id="accounts">
-    <option value="">Choose Account</option>
-  </select>
-  <input id="title" name="title"></input>
-  <input id="text" name="body"></input>
-  <button id="submit" value="go">go</button>
+<form class="form" id="case_form" method="POST" action="/case.php">
+  <div class="form-group">
+    <label for="accounts">Account</label>
+      <select name="account" id="accounts">
+        <option value="">Choose Account</option>
+      </select>
+    <br />
+    <label for="title">Title</label>
+    <input id="title" name="title" class="form-control"></input>
+    <label for="body">Body</label>
+    <textarea id="text" name="body" class="form-control" rows="3"></textarea>
+    <br />
+    <button class="btn btn-success" id="submit" value="go">Submit a new case...</button>
+    </div>
 </form>
-<div id="case_number">Please submit your case...</div>
-<div id="case_history"></div>
 </div>
+<div class="well" id="case_history"></div>
+
 </body>

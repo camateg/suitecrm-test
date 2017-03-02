@@ -96,11 +96,13 @@ function refreshNotes() {
 
 </head>
 <body>
-    <h3><a href="show_cases.php">Home</a></h3>
-    <h2>#<?php echo $case_number ?> - <?php echo $case_name ?></h2>
-    <h5><?php echo $case_description ?></h5>
-    <!-- header('Content-type: application/json');
-    echo json_encode($case_info); -->
+    <div class="well">
+    <a class="btn glyphicon glyphicon-home btn-primary" href="show_cases.php"></a>
+    <a class="btn btn-primary" href="logout.php">Logout</a>
+    <br />
+    <h3 class="well">#<?php echo $case_number ?> - <?php echo $case_name ?><br /><br />
+    <?php echo $case_description ?></h3>
+    <br /><br />
     <div id="notes"></div>
     <!-- <?php
       foreach($notes as $note) {
@@ -108,7 +110,12 @@ function refreshNotes() {
       };
     ?> -->
     <form action="" method="POST" id="add_note">
-      <input id="note_content"></input>
-      <input type="submit" value="submit note"></input>
-    </form> 
+      <div class="form-group">
+      <label for="note_content">Note Text</label>
+        <textarea id="note_content" class="form-control" placeholder="Type your note here." rows="3"></textarea>
+      <br /><br />
+      <input class="btn btn-success" type="submit" value="submit note"></input>
+      </div>   
+  </form>
+    </div>
 </body>

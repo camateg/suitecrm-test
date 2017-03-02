@@ -8,12 +8,22 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-
-<?php echo $_GET['error']; ?>
-<div class="well">
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-8 well" style="margin-top: 200px;">
+<h2>Some Portal Name</h2>
 <form action="login.php" method="POST">
-  <input name="user"></input>
-  <input type="password" name="password"></input>
-  <input type="submit" value="go"></input>
+  <div class="form-group">
+    <label for="userName">Username</label>
+    <input name="user" type="text" class="form-control" id="userName" placeholder="Username">
+  </div>
+  <div class="form-group">
+    <label for="userPassword">Password</label>
+    <input name="password" type="password" class="form-control" id="userPassword" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+  <div style="color: red;" class="error"><?php echo $_GET['error']; ?>
 </form>
+</div>
+<div class="col-md-1"></div>
 </div>

@@ -8,6 +8,7 @@
             $t1 = $b['number'];
             return $t1 - $t2;
         }
+
     $gel_parameters = array(
         "session" => $session_id,
         "module_name" => "Cases",

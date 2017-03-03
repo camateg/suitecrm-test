@@ -64,7 +64,7 @@ $(document).ready(function() {
 <body>
 <a class="btn btn-primary" href="logout.php">Logout</a>
 <div class="well">
-<form class="form" id="case_form" method="POST" action="/case.php">
+<form class="form" id="case_form" method="POST" action="case.php">
   <div class="form-group">
     <label for="accounts">Account</label>
       <div id="account_name"></div>

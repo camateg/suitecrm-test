@@ -89,15 +89,15 @@ function refreshNotes() {
     <br />
     <h3 class="well">#<?php echo $case_number ?> - <?php echo $case_name ?><br /><br />
     <?php echo $case_description ?></h3>
-    <br /><br />
+    <br />
+    <div class="well">
     <div id="notes"></div>
     <form action="" method="POST" id="add_note">
       <div class="form-group">
       <label for="note_content">Note Text</label>
         <textarea id="note_content" class="form-control" placeholder="Type your note here." rows="3"></textarea>
-      <br /><br />
-      <input class="btn btn-success" type="submit" value="submit note"></input>
-      </div>   
+      <br /><input class="btn btn-success" type="submit" value="submit note"></input>
+      </div>
   </form>
   <div id="documents"></div>
 </body>

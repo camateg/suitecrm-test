@@ -68,6 +68,13 @@ function refreshNotes() {
      $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + note['date'] + ' - ' + note['name'] + '</div><br />');
     }); 
   });
+  $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {
+    ret.forEach(function(doc) {
+     var btn_class = 'btn btn-default';
+     $('#documents').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '"><a href="download.php?document_id=' + doc['id'] + '">' + doc['document_name'] + '</a></div><br />');
+    });
+  });
+
 };
 
 </script>
@@ -82,11 +89,6 @@ function refreshNotes() {
     <?php echo $case_description ?></h3>
     <br /><br />
     <div id="notes"></div>
-    <!-- <?php
-      foreach($notes as $note) {
-        echo '<div class="well">' . $note['description'] . ' @ ' . $note['date'] . '</div>';
-      };
-    ?> -->
     <form action="" method="POST" id="add_note">
       <div class="form-group">
       <label for="note_content">Note Text</label>
@@ -95,5 +97,6 @@ function refreshNotes() {
       <input class="btn btn-success" type="submit" value="submit note"></input>
       </div>   
   </form>
+  <div id="documents"></div>
     </div>
 </body>

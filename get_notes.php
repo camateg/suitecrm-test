@@ -12,7 +12,7 @@
     $gel_parameters = array(
       "session" => $session_id,
       "module_name" => "AOP_Case_Updates",
-      "query" => " aop_case_updates.case_id = '" . $_GET['case_id'] . "' ",
+      "query" => " (aop_case_updates.internal = 0 OR aop_case_updates.internal IS NULL) AND aop_case_updates.case_id = '" . $_GET['case_id'] . "' ",
       "order_by" => "aop_case_updates.date_entered DESC",
       "offset" => "",
       "select_fields" => array(),

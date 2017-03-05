@@ -69,6 +69,7 @@ function refreshNotes() {
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {
+    $('#documents').html('');
     ret.forEach(function(doc) {
      var btn_class = 'btn btn-default';
      $('#documents').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '"><a href="download.php?document_id=' + doc['id'] + '">' + doc['document_name'] + '</a></div><br />');

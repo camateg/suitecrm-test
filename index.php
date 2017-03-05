@@ -3,16 +3,14 @@
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<div class="row">
-<div class="col-md-1"></div>
-<div class="col-md-8 well" style="margin-top: 200px;">
+<div class="well" style="margin-top: 40px;">
 <h2>Some Portal Name</h2>
 <form action="login.php" method="POST">
   <div class="form-group">
@@ -26,6 +24,4 @@
   <button type="submit" class="btn btn-default">Submit</button>
   <div style="color: red;" class="error"><?php echo $_GET['error']; ?>
 </form>
-</div>
-<div class="col-md-1"></div>
 </div>

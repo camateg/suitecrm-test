@@ -84,7 +84,6 @@ function refreshNotes() {
 
 </head>
 <body>
-    <div class="well">
     <a class="btn glyphicon glyphicon-home btn-primary" href="show_cases.php"></a>
     <a class="btn btn-primary" href="logout.php">Logout</a>
     <br />
@@ -101,5 +100,4 @@ function refreshNotes() {
       </div>   
   </form>
   <div id="documents"></div>
-    </div>
 </body>

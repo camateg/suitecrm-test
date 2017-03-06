@@ -67,7 +67,7 @@ function refreshNotes() {
      if (note['portal'] == 1) {
         btn_class = 'btn btn-default';
      } 
-     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + note['date'] + ' - ' + note['name'] + '</div><br />');
+     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + note['date'] + '<br />' + note['name'] + '</div><br />');
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {

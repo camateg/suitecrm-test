@@ -73,9 +73,9 @@ $(document).ready(function() {
       <div style="display: none;" id="account_id"></div>
     <br />
     <label for="title">Title</label>
-    <input id="title" name="title" class="form-control"></input>
+    <input placeholder="Case title." id="title" name="title" class="form-control"></input>
     <label for="body">Body</label>
-    <textarea id="text" name="body" class="form-control" rows="3"></textarea>
+    <textarea id="text" name="body" placeholder="A description of the case." class="form-control" rows="3"></textarea>
     <br />
     <button class="btn btn-success" id="submit" value="go">Submit a new case...</button>
     <div id="case_number"></div>

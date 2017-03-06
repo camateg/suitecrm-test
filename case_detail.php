@@ -14,8 +14,6 @@
 
     $ge_result = call("get_entry", $ge_parameters, $url);
    
-    //print_r($ge_result);
-    print_r($get_entry_result->entry_list[0]); 
     $case_name = $ge_result->entry_list[0]->name_value_list->name->value;
     $case_number = $ge_result->entry_list[0]->name_value_list->case_number->value;
     $case_description = $ge_result->entry_list[0]->name_value_list->description->value;
@@ -67,7 +65,8 @@ function refreshNotes() {
      if (note['portal'] == 1) {
         btn_class = 'btn btn-default';
      } 
-     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + note['date'] + '<br />' + note['name'] + '</div><br />');
+     var prettyDate = new Date(note['date']);
+     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + prettyDate.toDateString() + '<br /><pre>' + note['name'] + '</pre></div><br />');
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {

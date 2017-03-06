@@ -11,7 +11,8 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <div class="well" style="margin-top: 40px;">
-<h2>Some Portal Name</h2>
+<img src="suite_icon.png">
+<h2>Matt's Case Portal</h2>
 <form action="login.php" method="POST">
   <div class="form-group">
     <label for="userName">Username</label>

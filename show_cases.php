@@ -32,7 +32,7 @@ $(document).ready(function() {
          name = ele['name'] || '';
          number = ele['number'] || '';
          href = "case_detail.php?case_id=" +  id;
-         $('#case_history').append('<a style="margin-bottom: 10px;" width="300px" class="btn btn-default case_link" id="' + id + '" href="' + href + '">' + "#" + number + ' - ' + name + '</a><br />');
+         $('#case_history').append('<a style="width: 100%; margin-bottom: 10px;" width="300px" class="btn btn-default case_link" id="' + id + '" href="' + href + '">' + "#" + number + ' - ' + name + '</a><br />');
        });
     });
 

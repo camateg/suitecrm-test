@@ -61,12 +61,12 @@ function refreshNotes() {
   $.getJSON('get_notes.php?case_id=' + case_id, function(ret) {
     ret.forEach(function(note) {
      console.log(note['portal']);
-     var btn_class = 'btn btn-danger';
+     var portal_style = 'color: red;';
      if (note['portal'] == 1) {
-        btn_class = 'btn btn-default';
+        portal_style = 'color: black;';
      } 
      var prettyDate = new Date(note['date']);
-     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + prettyDate.toString() + '<br /><pre>' + note['name'] + '</pre></div><br />');
+     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="well">' + prettyDate.toString() + '<hr /><div style="' + portal_style + '">' + note['name'] + '</div></div><br />');
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {

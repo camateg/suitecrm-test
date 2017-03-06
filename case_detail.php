@@ -66,7 +66,7 @@ function refreshNotes() {
         btn_class = 'btn btn-default';
      } 
      var prettyDate = new Date(note['date']);
-     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + prettyDate.toDateString() + '<br /><pre>' + note['name'] + '</pre></div><br />');
+     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '">' + prettyDate.toString() + '<br /><pre>' + note['name'] + '</pre></div><br />');
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {

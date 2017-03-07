@@ -76,7 +76,22 @@ function refreshNotes() {
      $('#documents').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '"><a href="download.php?document_id=' + doc['id'] + '">' + doc['document_name'] + '</a></div><br />');
     });
   });
-
+/*
+  $('#add_upload').on('submit', function (e) {
+    var filename = $('#file').val();
+    console.log(filename);
+    payload = {
+        'file': filename,
+        'case_id': $('#case_id').val()
+    };
+    e.preventDefault();
+    $.post('upload.php', payload).done(function(data, status) {
+      refreshNotes();
+      $('#upload_success').html(data);
+      console.log(status);
+    }); 
+  });
+*/
 };
 
 </script>
@@ -102,9 +117,10 @@ function refreshNotes() {
        <div class="form-group">
        <label for="upload_file">Upload File</label>
           <input type="file" name="file" id="file">
-          <input type="hidden" name="case_id" value="<?php echo $cid ?>">
+          <input type="hidden" id="case_id" name="case_id" value="<?php echo $cid ?>">
           <input type="submit" value="submit" name="submit">
        </div>
     </form>
+    <div id="upload_success"></div>
   <div id="documents"></div>
 </body>

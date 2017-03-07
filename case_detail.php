@@ -116,9 +116,9 @@ function refreshNotes() {
     <form action="upload.php" method="POST" id="add_upload" enctype="multipart/form-data">
        <div class="form-group">
        <label for="upload_file">Upload File</label>
-          <input type="file" name="file" id="file">
+          <input class="btn btn-primary" type="file" name="file" id="file">
           <input type="hidden" id="case_id" name="case_id" value="<?php echo $cid ?>">
-          <input type="submit" value="submit" name="submit">
+          <input type="submit" value="submit file" class="btn btn-success" name="submit">
        </div>
     </form>
     <div id="upload_success"></div>

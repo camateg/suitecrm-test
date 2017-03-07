@@ -40,6 +40,5 @@
   );
 
   $sr_result = call("set_relationship", $sr_params, $url);
-  echo "Your document was submitted.";
 ?>
-  <a href="case_detail.php?case_id=<?php echo $cid?>">back...</a>
+  <a href="case_detail.php?case_id=<?php echo $cid ?>">Document submitted as <?php echo $_FILES['file']['name']; ?></a>

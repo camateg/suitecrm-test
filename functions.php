@@ -1,11 +1,11 @@
 <?php
     session_start();
 
-    $url = "http://matt-suite.fastcomet.host/service/v4_1/rest.php";
+    $url = "https://www.matt.ridgeleap.com/suite/service/v4_1/rest.php";
     $username = "admin";
     $password = "admin";
 
-    $portal_user = "ac82cb9c-0e04-1ed5-d3b1-58b9f48da653";
+    $portal_user = "133264aa-702c-c906-f6e0-58be0bbe4237";
 
     //function to make cURL request
     function call($method, $parameters, $url)

@@ -110,15 +110,17 @@ function refreshNotes() {
       <div class="form-group">
       <label for="note_content">Note Text</label>
         <textarea id="note_content" class="form-control" placeholder="Type your note here." rows="3"></textarea>
-      <br /><input class="btn btn-success" type="submit" value="submit note"></input>
+      <br /><input style="width: 100%" class="btn btn-success" type="submit" value="submit note"></input>
       </div>
   </form>
     <form action="upload.php" method="POST" id="add_upload" enctype="multipart/form-data">
        <div class="form-group">
        <label for="upload_file">Upload File</label>
-          <input class="btn btn-primary" type="file" name="file" id="file">
+          <input style="width: 100%" class="btn btn-primary" type="file" name="file" id="file">
+          <br />
           <input type="hidden" id="case_id" name="case_id" value="<?php echo $cid ?>">
-          <input type="submit" value="submit file" class="btn btn-success" name="submit">
+          <br />
+          <input style="width: 100%" type="submit" value="submit file" class="btn btn-success" name="submit">
        </div>
     </form>
     <div id="upload_success"></div>

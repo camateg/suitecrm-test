@@ -77,7 +77,7 @@ $(document).ready(function() {
     <label for="body">Body</label>
     <textarea id="text" name="body" placeholder="A description of the case." class="form-control" rows="3"></textarea>
     <br />
-    <button class="btn btn-success" id="submit" value="go">Submit a new case...</button>
+    <button style="width: 100%" class="btn btn-success" id="submit" value="go">submit case</button>
     <div id="case_number"></div>
     </div>
 </form>

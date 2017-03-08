@@ -66,14 +66,14 @@ function refreshNotes() {
         portal_style = 'color: black;';
      } 
      var prettyDate = new Date(note['date']);
-     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="well">' + prettyDate.toString() + '<hr /><div style="' + portal_style + '">' + note['name'] + '</div></div><br />');
+     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="well"><p class="glyphicon glyphicon-time"></p>  ' + prettyDate.toString() + '<br /><div style="' + portal_style + '"><p class="glyphicon glyphicon-pencil"></p> ' + note['name'] + '</div></div><br />');
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {
     $('#documents').html('');
     ret.forEach(function(doc) {
      var btn_class = 'btn btn-default';
-     $('#documents').append('<div style="margin-bottom: 10px; width: 100%" class="' + btn_class + '"><a href="download.php?document_id=' + doc['id'] + '">' + doc['document_name'] + '</a></div><br />');
+     $('#documents').append('<div style="text-align: left; margin-bottom: 10px; width: 100%" class="' + btn_class + '"><p class="glyphicon glyphicon-download-alt"></p>  <a href="download.php?document_id=' + doc['id'] + '">' + doc['document_name'] + '</a></div><br />');
     });
   });
 /*
@@ -98,23 +98,25 @@ function refreshNotes() {
 
 </head>
 <body>
-    <a class="btn glyphicon glyphicon-home btn-primary" href="show_cases.php"></a>
-    <a class="btn btn-primary" href="logout.php">Logout</a>
-    <br />
-    <h3 class="well">#<?php echo $case_number ?> - <?php echo $case_name ?><br /><br />
+    <div><a style="margin-left: 2px; margin-top: 2px;" class="btn glyphicon glyphicon-home btn-primary" href="show_cases.php"></a>
+    <a style="margin-top: 4px;" class="btn btn-primary" href="logout.php">Logout</a>
+    </div>
+    <h3 class="well"><p class="glyphicon glyphicon-briefcase"></p> #<?php echo $case_number ?> - <?php echo $case_name ?><br /><br />
     <?php echo $case_description ?></h3>
     <br />
     <div class="well">
     <div id="notes"></div>
     <form action="" method="POST" id="add_note">
       <div class="form-group">
-      <label for="note_content">Note Text</label>
+      <p class="glyphicon glyphicon-pencil"></p>
+      <label for="note_content">Write Note</label>
         <textarea id="note_content" class="form-control" placeholder="Type your note here." rows="3"></textarea>
       <br /><input style="width: 100%" class="btn btn-success" type="submit" value="submit note"></input>
       </div>
   </form>
     <form action="upload.php" method="POST" id="add_upload" enctype="multipart/form-data">
        <div class="form-group">
+       <p class="glyphicon glyphicon-cloud-upload"></p>
        <label for="upload_file">Upload File</label>
           <input style="width: 100%" class="btn btn-primary" type="file" name="file" id="file">
           <br />

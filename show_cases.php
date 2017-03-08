@@ -32,7 +32,7 @@ $(document).ready(function() {
          name = ele['name'] || '';
          number = ele['number'] || '';
          href = "case_detail.php?case_id=" +  id;
-         $('#case_history').append('<a style="width: 100%; margin-bottom: 10px;" width="300px" class="btn btn-default case_link" id="' + id + '" href="' + href + '">' + "#" + number + ' - ' + name + '</a><br />');
+         $('#case_history').append('<a style="text-align: left; width: 100%; margin-bottom: 10px;" width="300px" class="btn btn-default case_link" id="' + id + '" href="' + href + '"><p class="glyphicon glyphicon-briefcase"></p> ' + "#" + number + ' - ' + name + '</a><br />');
        });
     });
 
@@ -64,7 +64,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<a class="btn btn-primary" href="logout.php">Logout</a>
+<a style="margin-left: 2px; margin-top: 4px; margin-bottom: 20px;" class="btn btn-primary" href="logout.php">Logout</a>
 <div class="well">
 <form class="form" id="case_form" method="POST" action="case.php">
   <div class="form-group">

@@ -66,7 +66,7 @@ function refreshNotes() {
         portal_style = 'color: black';
      } 
      var prettyDate = new Date(note['date']);
-     $('#notes').append('<tr class="btn btn-default" style="margin-bottom: 5px; width: 100%">><td style=" padding: 5px; ' + portal_style + ' margin-bottom: 10px;"><p class="glyphicon glyphicon-time"></p>  ' + prettyDate.toDateString() + '<td style="' + portal_style + '">  ' + note['name'] + '</td></tr>');
+     $('#notes').append('<tr class="btn btn-default" style="margin-bottom: 5px; width: 100%">><td style="' + portal_style + ' margin-bottom: 3px;"><p class="glyphicon glyphicon-time"></p>  ' + prettyDate.toDateString() + '<td style="' + portal_style + '">  ' + note['name'] + '</td></tr>');
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {

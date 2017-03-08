@@ -56,17 +56,17 @@ $(document).ready(function() {
 function refreshNotes() {
   var case_id = "<?php echo $cid ?>";
 
-  $('#notes').html('');
+  $('#notes').html('<table class="table table-striped"></table>');
 
   $.getJSON('get_notes.php?case_id=' + case_id, function(ret) {
     ret.forEach(function(note) {
      console.log(note['portal']);
      var portal_style = 'color: red;';
      if (note['portal'] == 1) {
-        portal_style = 'color: black;';
+        portal_style = 'color: black';
      } 
      var prettyDate = new Date(note['date']);
-     $('#notes').append('<div style="margin-bottom: 10px; width: 100%" class="well"><p class="glyphicon glyphicon-time"></p>  ' + prettyDate.toString() + '<br /><div style="' + portal_style + '"><p class="glyphicon glyphicon-pencil"></p> ' + note['name'] + '</div></div><br />');
+     $('#notes').append('<tr class="btn btn-default" style="margin-bottom: 5px; width: 100%">><td style=" padding: 5px; ' + portal_style + ' margin-bottom: 10px;"><p class="glyphicon glyphicon-time"></p>  ' + prettyDate.toDateString() + '<td style="' + portal_style + '">  ' + note['name'] + '</td></tr>');
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {

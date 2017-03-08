@@ -1,3 +1,4 @@
+<title>Case Details</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
 
 <?php
@@ -56,7 +57,7 @@ $(document).ready(function() {
 function refreshNotes() {
   var case_id = "<?php echo $cid ?>";
 
-  $('#notes').html('<table class="table table-striped"></table>');
+  $('#notes').html('');
 
   $.getJSON('get_notes.php?case_id=' + case_id, function(ret) {
     ret.forEach(function(note) {
@@ -66,7 +67,7 @@ function refreshNotes() {
         portal_style = 'color: black';
      } 
      var prettyDate = new Date(note['date']);
-     $('#notes').append('<tr class="btn btn-default" style="margin-bottom: 5px; width: 100%">><td style="' + portal_style + ' margin-bottom: 3px;"><p class="glyphicon glyphicon-time"></p>  ' + prettyDate.toDateString() + '<td style="' + portal_style + '">  ' + note['name'] + '</td></tr>');
+     $('#notes').append('<div class="btn btn-default" style="width: 100%; margin-bottom: 2px;"><div style="' + portal_style + '"><p class="glyphicon glyphicon-comment"></p>  ' + prettyDate.toDateString() + '</div><div style="' + portal_style + '">  ' + note['name'] + '</div></div><br />');
     }); 
   });
   $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {
@@ -106,6 +107,7 @@ function refreshNotes() {
     <br />
     <div class="well">
     <div id="notes"></div>
+    <br />
     <form action="" method="POST" id="add_note">
       <div class="form-group">
       <p class="glyphicon glyphicon-pencil"></p>

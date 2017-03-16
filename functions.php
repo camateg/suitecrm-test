@@ -44,7 +44,7 @@
 	    }
 
 	function kick() {
-		        header( 'Location: ./?error?Session%20Expired' );
+		        header( 'Location: ./?error=Session%20Expired' );
 	}
 
 	function login() {
@@ -391,7 +391,7 @@
 
 	   			return Array('file' => $file, 'file_name' => $file_name);
 			} else {
-				return -1;
+				$this->kick();
 			}
 	}
     }

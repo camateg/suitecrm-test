@@ -82,7 +82,7 @@
 	      $name = $entry->name_value_list->name->value;
 	      $portal_md5 = $entry->name_value_list->portal_md5_c->value;
 	      $portal_user = $entry->name_value_list->portal_user_c->value;
-	      $contacts[]= array("id" => $id, "name" => $name, "portal_user" => $portal_user, "portal_md5" => $portal_md5);
+	      $contacts[]= array("id" => $id, "name" => $name, "portal_user" => $this->portal_user, "portal_md5" => $portal_md5);
 	    }
 
 	    if ($portal_md5 == md5($password)) {
@@ -226,7 +226,7 @@
 		      $desc = $entry->name_value_list->description->value;
 		      $date_entered = $entry->name_value_list->date_entered->value;
 		      $assigned_user_id = $entry->name_value_list->assigned_user_id->value;
-		      if ($assigned_user_id == $portal_user) {
+		      if ($assigned_user_id == $this->portal_user) {
 			 $portal = 1;
 		      } else {
 			 $portal = 0;

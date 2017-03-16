@@ -1,3 +1,5 @@
+<?php require_once('functions.php');
+?>
 <title>Cases</title>
 
 <head>
@@ -17,7 +19,7 @@
 
 $(document).ready(function() {
   $('#account_name').html('Loading account...');
-  $.getJSON('get_accounts.php', function(res) {
+  $.getJSON('service.php?action=get_accounts&param=<?php echo $_SESSION['user_id']; ?>', function(res) {
     $.each(res, function(v,t) {
       $('#account_name').html(t['name']);
       $('#account_id').html(t['id']);
@@ -28,7 +30,7 @@ $(document).ready(function() {
 
   function refreshHistory() {
     $('#case_history').html('');
-    $.getJSON('cases_by_account.php?account_id=' + $('#account_id').html(), function(ret) {
+    $.getJSON('service.php?action=cases_by_account&param=' + $('#account_id').html(), function(ret) {
        ret.forEach(function(ele) {
          id = ele['id'] || '';
          name = ele['name'] || '';

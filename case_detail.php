@@ -44,7 +44,7 @@ function refreshNotes() {
 
   $('#notes').html('');
 
-  $.getJSON('get_notes.php?case_id=' + case_id, function(ret) {
+  $.getJSON('service.php?action=get_notes&param=' + case_id, function(ret) {
     ret.forEach(function(note) {
      console.log(note['portal']);
      var portal_style = 'color: red;';
@@ -55,7 +55,7 @@ function refreshNotes() {
      $('#notes').append('<div class="btn btn-default" style="width: 100%; margin-bottom: 2px;"><div style="' + portal_style + '"><p class="glyphicon glyphicon-comment"></p>  ' + prettyDate.toDateString() + '</div><p style="white-space: normal; ' + portal_style + '">  ' + note['name'] + '</p></div><br />');
     }); 
   });
-  $.getJSON('get_documents.php?case_id=' + case_id, function(ret) {
+  $.getJSON('service.php?action=get_documents&param=' + case_id, function(ret) {
     $('#documents').html('');
     ret.forEach(function(doc) {
      var btn_class = 'btn btn-default';

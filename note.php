@@ -3,6 +3,6 @@
     require_once('functions.php');
 
     $suite = new SuiteCRM();
-    $accounts = $suite->get_accounts($_SESSION['user_id']);    
+    $note = $suite->add_note($_POST['name'], $_POST['case_id']);
     header('Content-type: application/json');
-    echo json_encode($accounts);
+    echo json_encode($note);    

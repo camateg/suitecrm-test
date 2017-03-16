@@ -5,23 +5,8 @@
 
     require_once('functions.php');
 
-    $ge_parameters = array(
-        "session" => $session_id,
-        "module_name" => "Cases",
-        "id" => $_GET['case_id'],
-        "select_fields" => array(),
-        'link_name_to_fields_array' => [],
-    );
-
-    $ge_result = call("get_entry", $ge_parameters, $url);
-   
-    $case_name = $ge_result->entry_list[0]->name_value_list->name->value;
-    $case_number = $ge_result->entry_list[0]->name_value_list->case_number->value;
-    $case_description = $ge_result->entry_list[0]->name_value_list->description->value;
-    
-    $cid = $_GET['case_id'];
-
-    $case_info = array("case_name" => $case_name, "case_number" => $case_number, "case_description" => $case_description);
+    $suite = new SuiteCRM();
+    $case_info = $suite->case_detail($_GET['case_id']);
 
 ?>
 <head>
@@ -41,10 +26,10 @@ $(document).ready(function() {
   $('#add_note').on('submit', function(e) {
     e.preventDefault();
     payload = {
-        'case_id': "<?php echo $cid ?>",
+        'case_id': "<?php echo $case_info['case_id'] ?>",
         'name': $('#note_content').val()
     };
-    $.post('add_note.php',
+    $.post('note.php',
       payload).done(
       function(data,status) {
         refreshNotes();
@@ -55,7 +40,7 @@ $(document).ready(function() {
 });
 
 function refreshNotes() {
-  var case_id = "<?php echo $cid ?>";
+  var case_id = "<?php echo $case_info['case_id'] ?>";
 
   $('#notes').html('');
 
@@ -77,22 +62,6 @@ function refreshNotes() {
      $('#documents').append('<div style="text-align: left; margin-bottom: 10px; width: 100%" class="' + btn_class + '"><p class="glyphicon glyphicon-download-alt"></p>  <a href="download.php?document_id=' + doc['id'] + '">' + doc['document_name'] + '</a></div><br />');
     });
   });
-/*
-  $('#add_upload').on('submit', function (e) {
-    var filename = $('#file').val();
-    console.log(filename);
-    payload = {
-        'file': filename,
-        'case_id': $('#case_id').val()
-    };
-    e.preventDefault();
-    $.post('upload.php', payload).done(function(data, status) {
-      refreshNotes();
-      $('#upload_success').html(data);
-      console.log(status);
-    }); 
-  });
-*/
 };
 
 </script>
@@ -102,8 +71,8 @@ function refreshNotes() {
     <div><a style="margin-left: 2px; margin-top: 2px;" class="btn glyphicon glyphicon-home btn-primary" href="show_cases.php"></a>
     <a style="margin-top: 4px;" class="btn btn-primary" href="logout.php">Logout</a>
     </div>
-    <h3 class="well"><p class="glyphicon glyphicon-briefcase"></p> #<?php echo $case_number ?> - <?php echo $case_name ?><br /><br />
-    <?php echo $case_description ?></h3>
+    <h3 class="well"><p class="glyphicon glyphicon-briefcase"></p> #<?php echo $case_info['case_number'] ?> - <?php echo $case_info['case_name'] ?><br /><br />
+    <?php echo $case_info['case_description'] ?></h3>
     <br />
     <div class="well">
     <div id="notes"></div>
@@ -122,7 +91,7 @@ function refreshNotes() {
        <label for="upload_file">Upload File</label>
           <input style="width: 100%" class="btn btn-primary" type="file" name="file" id="file">
           <br />
-          <input type="hidden" id="case_id" name="case_id" value="<?php echo $cid ?>">
+          <input type="hidden" id="case_id" name="case_id" value="<?php echo $case_info['case_id'] ?>">
           <br />
           <input style="width: 100%" type="submit" value="submit file" class="btn btn-success" name="submit">
        </div>

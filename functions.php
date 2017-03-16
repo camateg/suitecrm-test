@@ -58,41 +58,40 @@
 	    $this->session = $login_result->id;
 	    return $login_result->id;
 	}
+	function ensure_portal() {
+		return $this->portal_login($_SESSION['user_name'], $_SESSION['user_pass']);
+	}
 	function portal_login($user, $password) {
 	    $this->login();
-		$gel_parameters = array(
+	    $gel_parameters = array(
 		 "session" => $this->session,
 		 "module_name" => "Contacts",
-		 "query" => " contacts_cstm.portal_user_c = '" . $user . "'",
+		 //"query" => "",
+  		 "query" => " contacts_cstm.portal_user_c = '" . $user . "' ",
 		 "order_by" => "",
 		 "offset" => 0,
 		 "select_fields" => array(),
-		 "link_name_to_fields_array" => array(),
+		 "link_name_to_fields_array" => array("portal_user_c", "portal_md5_c"),
 		 "max_results" => 1,
 		 "deleted" => 0,
 		 "favorites" => false,
 	    );
-
 	    $gel_results = $this->call("get_entry_list", $gel_parameters);
 
-	    $contacts = [];
-
-	    foreach($gel_results->entry_list as $entry) {
-	      $id = $entry->name_value_list->id->value;
+	    $entry = $gel_results->entry_list[0];
+   	      $id = $entry->name_value_list->id->value;
 	      $name = $entry->name_value_list->name->value;
 	      $portal_md5 = $entry->name_value_list->portal_md5_c->value;
 	      $portal_user = $entry->name_value_list->portal_user_c->value;
-	      $contacts[]= array("id" => $id, "name" => $name, "portal_user" => $this->portal_user, "portal_md5" => $portal_md5);
-	    }
-
 	    if ($portal_md5 == md5($password)) {
-	      return $id; 
+		return $id; 
 	    } else {
 	      return -1;
 	    }
 	}
 
 	function get_accounts($user_id) {
+	    if ($this->ensure_portal() != -1) {
 	    $this->login();
 		$ger_params = array(
 		 'session' => $this->session,
@@ -121,10 +120,14 @@
 	      $accounts[]= array("id" => $id, "name" => $name);
 	    }
 	    return $accounts;
+	    } else {
+	      return -1;
+	    }
 	}
 
 	function cases_by_account($account_id) {
 	    $this->login();
+	if ($this->ensure_portal() != -1) {
 	$gel_parameters = array(
 		"session" => $this->session,
 		"module_name" => "Cases",
@@ -150,9 +153,13 @@
 	    }
 
 	    return $cases;
+	} else {
+	    return -1;
+	}
 	}
 
 	function case_detail($case_id) {
+		if ($this->ensure_portal() != -1) {
 		$this->login();
 		    $ge_parameters = array(
 			"session" => $this->session,
@@ -172,8 +179,12 @@
 
 		    $case_info = array("case_id" => $cid, "case_name" => $case_name, "case_number" => $case_number, "case_description" => $case_description);
 		return $case_info;
+		} else {
+		return -1;
+		}
 	}
 	function get_documents($case_id) {
+if ($this->ensure_portal() != -1) {
 		$this->login();
 	     $gr_parameters = array(
 		"session" => $this->session,
@@ -199,10 +210,15 @@
 	       $documents[]= array("id" => $id, "document_name" => $document_name);
 	    } 
 	   return $documents;
+} else {
+	return -1;
+}
 	}
 
 	function get_notes($case_id) {
- 		$this->login();
+ 
+if ($this->ensure_portal() != -1) {
+		$this->login();
 		    $gel_parameters = array(
 		      "session" => $this->session,
 		      "module_name" => "AOP_Case_Updates",
@@ -234,9 +250,13 @@
 		      $notes[] = array("id" => $id, "name" => $name, "description" => $desc, "date" => $date_entered, "portal" => $portal);
 		    };
 		return $notes;
+	} else {
+		return -1;
+	}
 	}
 	function add_case($title, $body, $account) {
 		$this->login();
+		if ($this->ensure_portal() != -1) {
 		    $set_entry_parameters = array(
 			 "session" => $this->session,
 			 "module_name" => "Cases",
@@ -269,10 +289,14 @@
 
 		    $cases = array('id' => $cid, 'name' => $case_name, 'number' => $case_number);
 		    return $cases;
+		} else {
+			return -1;
+		}
 	}
 
 	function add_note($name, $case_id) {
 		$this->login();
+	if ($this->ensure_portal() != -1) {
 	    $set_entry_parameters = array(
 		 "session" => $this->session,
 		 "module_name" => "AOP_Case_Updates",
@@ -286,10 +310,14 @@
 
 	    $set_entry_result = $this->call("set_entry", $set_entry_parameters);
 	    return $set_entry_result->id;
+	} else {
+		return -1;
+	}
 	}
 
 	function upload($case_id, $file_name, $tmp_name) {
 		$this->login();
+		if ($this->ensure_portal() != -1) {
 		  $se_params = array(
 		    "session" => $this->session,
 		    "module" => "Documents",
@@ -328,11 +356,14 @@
 
 		  $sr_result = $this->call("set_relationship", $sr_params);
 		return $sr_result;
-
+		} else {
+			return -1;
+		}
 	}
 
         function download($doc_id) {
 		$this->login();
+	if ($this->ensure_portal() != -1) {
 	     $ge_parameters = array(
 		"session" => $this->session,
 		"module_name" => "Documents",
@@ -356,6 +387,9 @@
 	    $file = $get_doc_result->document_revision->file;
 
 	   return Array('file' => $file, 'file_name' => $file_name);
+	} else {
+	return -1;
+	}
 	}
     }
 ?>

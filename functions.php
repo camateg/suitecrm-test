@@ -8,7 +8,7 @@
 	    public $session = '';
 
 	    private $username = "admin";
-	    private $password = "admin";
+	    private $password = "SOMEPASS";
 
 	    //function to make cURL request
 	    function call($method, $parameters)

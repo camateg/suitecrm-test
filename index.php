@@ -1,4 +1,7 @@
-<title>Case Portal</title>
+<?php require_once('config.php'); ?>
+
+<title><?php echo TITLE; ?></title>
+
 <script
   src="//code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -14,7 +17,8 @@
 <div class="well" style="margin-top: 40px;">
 <div style="text-align: center;">
 <img src="suite_icon.png">
-<h2>Matt's Case Portal</h2>
+
+<h2><?php echo TITLE; ?></h2>
 </div>
 <form action="login.php" method="POST">
   <div class="form-group">

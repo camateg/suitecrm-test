@@ -1,4 +1,7 @@
-<title>Case Details</title>
+<?php require_once('config.php'); ?>
+
+<title><?php echo TITLE; ?></title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
 
 <?php

@@ -1,6 +1,6 @@
-<?php require_once('functions.php');
-?>
-<title>Cases</title>
+<?php require_once('functions.php'); ?>
+
+<title><?php echo TITLE; ?></title>
 
 <head>
 <script

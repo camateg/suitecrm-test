@@ -3,14 +3,15 @@
 
     $suite = new SuiteCRM();
 
-    $user_id = $suite->portal_login($_POST['user'], $_POST['password']);    
-    $user_pass = $_POST['password'];
+    $user_hash = md5($_POST['password']);
+
+    $user_id = $suite->portal_login($_POST['user'], $user_hash);    
 
     if ($user_id == -1) {
         header( 'Location: ./?error=Password%20Incorrect' );
     } else {
 	$_SESSION['user_id'] = $user_id;
         $_SESSION['user_name'] = $_POST['user']; 
-	$_SESSION['user_pass'] = $user_pass;
+	$_SESSION['user_hash'] = $user_hash;
         header( 'Location: ./show_cases.php');
     }

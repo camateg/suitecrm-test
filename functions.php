@@ -1,14 +1,31 @@
 <?php
     session_start();
+    require_once('config.php');
+    /* 
+       These functions are necessary to overcome an ORDER BY bug in SuiteCRM.
+    */
 
+    function sort_notes($a, $b) {
+            return strtotime($b['date']) - strtotime($a['date']);
+    }
+
+    function sort_cases($a, $b) {
+    	    return $b['number'] - $a['number'];
+    }
+
+    /*
+      Main wrapper class.
+    */    
     class SuiteCRM
     {
-	    public $url = "http://www.matt.ridgeleap.com/suite/service/v4_1/rest.php";
-	    public $portal_user = "133264aa-702c-c906-f6e0-58be0bbe4237";
-	    public $session = '';
 
-	    private $username = "admin";
-	    private $password = "admin";
+	    public $url =	   URL;
+            private $portal_user = PORTAL_USER;
+
+	    private $username =    ADMIN_USER;
+	    private $password =    ADMIN_PASS;
+
+	    private $session = '';
 
 	    //function to make cURL request
 	    function call($method, $parameters)
@@ -47,6 +64,10 @@
 		        header( 'Location: ./?error=Session%20Expired' );
 	}
 
+	/*
+          Login to the CRM initially for all functions.
+	*/
+
 	function login() {
 	    $login_parameters = array(
 		 "user_auth" => array(
@@ -62,10 +83,15 @@
 	    $this->session = $login_result->id;
 	    return $login_result->id;
 	}
+
+	/*
+	  Are we really logged in?
+	*/
+
 	function ensure_portal() {
-		return $this->portal_login($_SESSION['user_name'], $_SESSION['user_pass']);
+		return $this->portal_login($_SESSION['user_name'], $_SESSION['user_hash']);
 	}
-	function portal_login($user, $password) {
+	function portal_login($user, $hash) {
 	    $this->login();
 	    $gel_parameters = array(
 		 "session" => $this->session,
@@ -86,12 +112,16 @@
 	      $name = $entry->name_value_list->name->value;
 	      $portal_md5 = $entry->name_value_list->portal_md5_c->value;
 	      $portal_user = $entry->name_value_list->portal_user_c->value;
-	    if ($portal_md5 == md5($password)) {
+	    if ($portal_md5 == $hash) {
 		return $id; 
 	    } else {
 	      return -1;
 	    }
 	}
+
+	/*
+	  Get a list of accounts based on user / contact
+	*/
 
 	function get_accounts($user_id) {
 	    if ($this->ensure_portal() != -1) {
@@ -128,6 +158,10 @@
 	    }
 	}
 
+	/*
+	  Get a list of cases based on the assigned acccount id
+	*/
+
 	function cases_by_account($account_id) {
 	    $this->login();
 		if ($this->ensure_portal() != -1) {
@@ -155,12 +189,18 @@
 		      $cases[]= array("id" => $id, "name" => $name, "number" => $number);
 		    }
 
+                    usort($cases, "sort_cases");
+
 		    return $cases;
 		} else {
 			$this->kick();	
 		}
 	}
 
+	/*
+	  Get case details based on the id of a case.
+	*/
+	
 	function case_detail($case_id) {
 		if ($this->ensure_portal() != -1) {
 			$this->login();
@@ -186,6 +226,11 @@
 				$this->kick();
 			}
 		}
+
+	/*
+	  Get a JOSN-encoded list of revisions and documents based on the id of a case.
+	*/
+
 	function get_documents($case_id) {
 		if ($this->ensure_portal() != -1) {
 			$this->login();
@@ -252,6 +297,8 @@
 		      	}
 		      	$notes[] = array("id" => $id, "name" => $name, "description" => $desc, "date" => $date_entered, "portal" => $portal);
 		    };
+				usort($notes, "sort_notes");
+	
 				return $notes;
 			} else {
 				return -1;

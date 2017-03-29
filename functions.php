@@ -228,7 +228,7 @@
 		}
 
 	/*
-	  Get a JOSN-encoded list of revisions and documents based on the id of a case.
+	  Get a JSON-encoded list of revisions and documents based on the id of a case.
 	*/
 
 	function get_documents($case_id) {

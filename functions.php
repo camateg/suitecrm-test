@@ -91,6 +91,8 @@
 	function ensure_portal() {
 		return $this->portal_login($_SESSION['user_name'], $_SESSION['user_hash']);
 	}
+
+
 	function portal_login($user, $hash) {
 	    $this->login();
 	    $gel_parameters = array(
@@ -106,13 +108,12 @@
 		 "favorites" => false,
 	    );
 	    $gel_results = $this->call("get_entry_list", $gel_parameters);
-
 	    $entry = $gel_results->entry_list[0];
    	      $id = $entry->name_value_list->id->value;
 	      $name = $entry->name_value_list->name->value;
 	      $portal_md5 = $entry->name_value_list->portal_md5_c->value;
 	      $portal_user = $entry->name_value_list->portal_user_c->value;
-	    if ($portal_md5 == $hash) {
+	    if (strlen($hash) && $portal_md5 === $hash && $hash !== '') {
 		return $id; 
 	    } else {
 	      return -1;
@@ -202,7 +203,7 @@
 	*/
 	
 	function case_detail($case_id) {
-		if ($this->ensure_portal() != -1) {
+		if ($this->ensure_portal() !== -1) {
 			$this->login();
 			    $ge_parameters = array(
 					"session" => $this->session,

@@ -74,7 +74,7 @@ function refreshNotes() {
     <div><a style="margin-left: 2px; margin-top: 2px;" class="btn glyphicon glyphicon-home btn-primary" href="show_cases.php"></a>
     <a style="margin-top: 4px;" class="btn btn-primary" href="logout.php">Logout</a>
     </div>
-    <h3 class="well" style="background-color: <?php echo LOGIN_BG; ?>"><p class="glyphicon glyphicon-briefcase"></p> #<?php echo $case_info['case_number'] ?> - <?php echo $case_info['case_name'] ?><br /><br />
+    <h3 class="well" style="color: <?php echo HEADER_FG; ?>; background-color: <?php echo LOGIN_BG; ?>"><p class="glyphicon glyphicon-briefcase"></p> #<?php echo $case_info['case_number'] ?> - <?php echo $case_info['case_name'] ?><br /><br />
     <?php echo $case_info['case_description'] ?></h3>
     <br />
     <div class="well" style="background-color: <?php echo LOGIN_BG; ?>">

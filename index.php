@@ -14,9 +14,8 @@
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<div class="well" style="margin-top: 40px;">
+<div class="well" style="margin-top: 40px; background-color: <?php echo LOGIN_BG; ?>">
 <div style="text-align: center;">
-<img src="suite_icon.png">
 
 <h2><?php echo TITLE; ?></h2>
 </div>
@@ -29,7 +28,7 @@
     <label for="userPassword">Password</label>
     <input name="password" type="password" class="form-control" id="userPassword" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-default"><?php echo LOGIN; ?></button>
   <div style="color: red;" class="error"><?php echo $_GET['error']; ?>
 </form>
 </div>

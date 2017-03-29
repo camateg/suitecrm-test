@@ -36,7 +36,7 @@ $(document).ready(function() {
          name = ele['name'] || '';
          number = ele['number'] || '';
          href = "case_detail.php?case_id=" +  id;
-         $('#case_history').append('<a style="text-align: left; width: 100%; margin-bottom: 10px;" width="300px" class="btn btn-default case_link" id="' + id + '" href="' + href + '"><p class="glyphicon glyphicon-briefcase"></p> ' + "#" + number + ' - ' + name + '</a><br />');
+         $('#case_history').append('<a style="color: <?php echo CASE_LIST_FG; ?>; background-color: <?php echo CASE_LIST_BG ?>; text-align: left; width: 100%; margin-bottom: 10px;" width="300px" class="btn btn-default case_link" id="' + id + '" href="' + href + '"><p class="glyphicon glyphicon-briefcase"></p> ' + "#" + number + ' - ' + name + '</a><br />');
        });
     });
 
@@ -69,7 +69,7 @@ $(document).ready(function() {
 </head>
 <body>
 <a style="margin-left: 2px; margin-top: 4px; margin-bottom: 20px;" class="btn btn-primary" href="logout.php">Logout</a>
-<div class="well">
+<div class="well" style="background-color: <?php echo LOGIN_BG; ?>">
 <form class="form" id="case_form" method="POST" action="case.php">
   <div class="form-group">
     <label for="accounts">Account</label>
@@ -81,11 +81,11 @@ $(document).ready(function() {
     <label for="body">Body</label>
     <textarea id="text" name="body" placeholder="A description of the case." class="form-control" rows="3"></textarea>
     <br />
-    <button style="width: 100%" class="btn btn-success" id="submit" value="go">submit case</button>
+    <button class="btn btn-success" style="width: 100%; background-color: <?php echo SUBMIT_BG; ?>" id="submit" value="go"><?php echo SUBMIT_CASE; ?></button>
     <div id="case_number"></div>
     </div>
 </form>
 </div>
-<div class="well" id="case_history"></div>
+<div class="well" style="background-color: <?php echo LOGIN_BG; ?>" id="case_history"></div>
 
 </body>

@@ -52,17 +52,17 @@ function refreshNotes() {
      console.log(note['portal']);
      var portal_style = 'color: red;';
      if (note['portal'] == 1) {
-        portal_style = 'color: black';
+        portal_style = 'color: <?php echo NOTE_LIST_FG; ?>';
      } 
      var prettyDate = new Date(note['date']);
-     $('#notes').append('<div class="btn btn-default" style="width: 100%; margin-bottom: 2px;"><div style="' + portal_style + '"><p class="glyphicon glyphicon-comment"></p>  ' + prettyDate.toDateString() + '</div><p style="white-space: normal; ' + portal_style + '">  ' + note['name'] + '</p></div><br />');
+     $('#notes').append('<div class="btn btn-default" style="background-color: <?php echo NOTE_LIST_BG ?>; width: 100%; margin-bottom: 2px;"><div style="' + portal_style + '"><p class="glyphicon glyphicon-comment"></p>  ' + prettyDate.toDateString() + '</div><p style="white-space: normal; ' + portal_style + '">  ' + note['name'] + '</p></div><br />');
     }); 
   });
   $.getJSON('service.php?action=get_documents&param=' + case_id, function(ret) {
     $('#documents').html('');
     ret.forEach(function(doc) {
      var btn_class = 'btn btn-default';
-     $('#documents').append('<div style="text-align: left; margin-bottom: 10px; width: 100%" class="' + btn_class + '"><p class="glyphicon glyphicon-download-alt"></p>  <a href="download.php?document_id=' + doc['id'] + '">' + doc['document_name'] + '</a></div><br />');
+     $('#documents').append('<div style="color: <?php echo NOTE_LIST_FG ?>; background-color: <?php echo NOTE_LIST_BG ?>; text-align: left; margin-bottom: 10px; width: 100%" class="' + btn_class + '"><p class="glyphicon glyphicon-download-alt"></p>  <a style="color: <?php echo NOTE_LIST_FG ?>; href="download.php?document_id=' + doc['id'] + '">' + doc['document_name'] + '</a></div><br />');
     });
   });
 };
@@ -74,10 +74,10 @@ function refreshNotes() {
     <div><a style="margin-left: 2px; margin-top: 2px;" class="btn glyphicon glyphicon-home btn-primary" href="show_cases.php"></a>
     <a style="margin-top: 4px;" class="btn btn-primary" href="logout.php">Logout</a>
     </div>
-    <h3 class="well"><p class="glyphicon glyphicon-briefcase"></p> #<?php echo $case_info['case_number'] ?> - <?php echo $case_info['case_name'] ?><br /><br />
+    <h3 class="well" style="background-color: <?php echo LOGIN_BG; ?>"><p class="glyphicon glyphicon-briefcase"></p> #<?php echo $case_info['case_number'] ?> - <?php echo $case_info['case_name'] ?><br /><br />
     <?php echo $case_info['case_description'] ?></h3>
     <br />
-    <div class="well">
+    <div class="well" style="background-color: <?php echo LOGIN_BG; ?>">
     <div id="notes"></div>
     <br />
     <form action="" method="POST" id="add_note">
@@ -85,7 +85,7 @@ function refreshNotes() {
       <p class="glyphicon glyphicon-pencil"></p>
       <label for="note_content">Write Note</label>
         <textarea id="note_content" class="form-control" placeholder="Type your note here." rows="3"></textarea>
-      <br /><input style="width: 100%" class="btn btn-success" type="submit" value="submit note"></input>
+      <br /><input style="width: 100%; background-color: <?php echo SUBMIT_BG; ?>" class="btn btn-success" type="submit" value="submit note"></input>
       </div>
   </form>
     <form action="upload.php" method="POST" id="add_upload" enctype="multipart/form-data">
@@ -96,7 +96,7 @@ function refreshNotes() {
           <br />
           <input type="hidden" id="case_id" name="case_id" value="<?php echo $case_info['case_id'] ?>">
           <br />
-          <input style="width: 100%" type="submit" value="submit file" class="btn btn-success" name="submit">
+          <input style="width: 100%; background-color: <?php echo SUBMIT_BG; ?>" type="submit" value="submit file" class="btn btn-success" name="submit">
        </div>
     </form>
     <div id="upload_success"></div>

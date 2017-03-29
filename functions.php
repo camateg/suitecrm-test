@@ -23,7 +23,7 @@
             private $portal_user = PORTAL_USER;
 
 	    private $username =    ADMIN_USER;
-	    private $password =    ADMIN_PASS;
+	    private $hash =        ADMIN_HASH;
 
 	    private $session = '';
 
@@ -72,7 +72,7 @@
 	    $login_parameters = array(
 		 "user_auth" => array(
 		      "user_name" => $this->username,
-		      "password" => md5($this->password),
+		      "password" => $this->hash,
 		      "version" => "1"
 		 ),
 		 "application_name" => "mCasePortal",
